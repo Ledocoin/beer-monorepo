@@ -1,4 +1,5 @@
 name: CodeQL
+
 on:
   push:
     branches: [ main ]
@@ -6,12 +7,44 @@ on:
     branches: [ main ]
   schedule:
     - cron: "0 3 * * 1"
+
+permissions:
+  contents: read
+  security-events: write   # нужно CodeQL
+  actions: read
+
 jobs:
   analyze:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
+
+      # Инициализируем CodeQL для Java
       - uses: github/codeql-action/init@v3
-        with: { languages: java }
-      - uses: github/codeql-action/autobuild@v3
+        with:
+          languages: java
+
+      # Ставим JDK 17 (как у проектов)
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      # Нормализуем и даём права gradlew
+      - name: Prepare Gradle wrappers
+        run: |
+          sed -i 's/\r$//' service-main/gradlew service-employee/gradlew
+          chmod +x service-main/gradlew service-employee/gradlew
+
+      # ЯВНО собираем оба подпроекта (без тестов — для статанализа они не нужны)
+      - name: Build all modules for CodeQL
+        env:
+          GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx2g"
+        run: |
+          (cd service-main && ./gradlew clean assemble -x test --no-daemon)
+          (cd service-employee && ./gradlew clean assemble -x test --no-daemon)
+
+      # Запускаем анализ
       - uses: github/codeql-action/analyze@v3
