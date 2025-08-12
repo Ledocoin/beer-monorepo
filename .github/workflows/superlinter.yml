@@ -1,10 +1,11 @@
-name: Lint
+name: Super-Linter
 
 on:
   push:
+    branches: [ main ]
   pull_request:
 
-permissions:             # важно!
+permissions:
   contents: read
   checks: write
   statuses: write
@@ -13,33 +14,25 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0            # супер-линтеру так проще
+          fetch-depth: 0
 
-      - uses: github/super-linter/slim@v6
+      - name: Run Super-Linter
+        uses: github/super-linter/slim@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BRANCH: main
           VALIDATE_ALL_CODEBASE: true
-          IGNORE_GITIGNORED_FILES: true
-          # не линкуем мусор/сборку/IDE:
-          FILTER_REGEX_EXCLUDE: "(^service-.*/(build|out)/)|(^\\.idea/)|(^\\.gradle/)"
-          # ВКЛ/ВЫКЛ по нужным инструментам:
-          VALIDATE_GITHUB_ACTIONS: true
+
+          # ✅ Оставляем только полезные линтеры
+          VALIDATE_JAVA: true
           VALIDATE_YAML: true
           VALIDATE_DOCKERFILE_HADOLINT: true
+          VALIDATE_GITHUB_ACTIONS: true
           VALIDATE_GITLEAKS: true
 
-          # Java: если используешь Spotless/Checkstyle в Gradle,
-          # форматер super-linter можно выключить:
-          VALIDATE_JAVA: true
-          VALIDATE_GOOGLE_JAVA_FORMAT: false
-
-          # Отключаем то, что не нужно:
-          VALIDATE_CHECKOV: false
-          VALIDATE_JSCPD: false
-          VALIDATE_SHELL_SHFMT: false
-          VALIDATE_BASH: false
-          VALIDATE_SQL: false
-          VALIDATE_SQLFLUFF: false
+          # ❌ Все остальные по умолчанию будут выключены
+          IGNORE_GITIGNORED_FILES: true
+          FILTER_REGEX_EXCLUDE: "(^service-.*/(build|out)/)|(^\\.idea/)|(^\\.gradle/)"
