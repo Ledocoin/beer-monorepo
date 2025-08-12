@@ -1,27 +1,31 @@
-name: CI service-employee
+name: Build — service-employee
 on:
   push:
-    paths: ["service-employee/**", ".github/workflows/ci-service-employee.yml"]
+    paths:
+      - "service-employee/**"
+      - ".github/workflows/build-service-employee.yml"
   pull_request:
-    paths: ["service-employee/**"]
+    paths:
+      - "service-employee/**"
+
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: service-employee   # или service-employee
-
+        working-directory: service-employee
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
-      - uses: gradle/actions/setup-gradle@v3
-      - name: Normalize EOL (gradlew)
-        run: sed -i 's/\r$//' gradlew
+          java-version: 17
+          cache: gradle
+
       - name: Make gradlew executable
-        run: chmod +x ./gradlew
-      - name: Build
+        run: sed -i 's/\r$//' gradlew && chmod +x gradlew
+
+      - name: Build & Test
         run: ./gradlew clean build --no-daemon
-        # временно можно: ./gradlew clean build -x test --no-daemon

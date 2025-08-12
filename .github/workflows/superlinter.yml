@@ -1,38 +1,27 @@
-name: Super-Linter
-
+name: Lint — infra
 on:
   push:
-    branches: [ main ]
   pull_request:
-
 permissions:
   contents: read
   checks: write
   statuses: write
-
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Run Super-Linter
-        uses: github/super-linter/slim@v6
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: github/super-linter/slim@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BRANCH: main
           VALIDATE_ALL_CODEBASE: true
-
-          # ✅ Оставляем только полезные линтеры
-          VALIDATE_JAVA: true
+          # только нужные проверки:
           VALIDATE_YAML: true
           VALIDATE_DOCKERFILE_HADOLINT: true
           VALIDATE_GITHUB_ACTIONS: true
           VALIDATE_GITLEAKS: true
-
-          # ❌ Все остальные по умолчанию будут выключены
+          # игнор мусора:
           IGNORE_GITIGNORED_FILES: true
           FILTER_REGEX_EXCLUDE: "(^service-.*/(build|out)/)|(^\\.idea/)|(^\\.gradle/)"

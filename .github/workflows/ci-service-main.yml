@@ -1,9 +1,13 @@
-name: CI service-main
+name: Build — service-main
 on:
   push:
-    paths: ["service-main/**", ".github/workflows/ci-service-main.yml"]
+    paths:
+      - "service-main/**"
+      - ".github/workflows/build-service-main.yml"
   pull_request:
-    paths: ["service-main/**"]
+    paths:
+      - "service-main/**"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,20 +17,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
-
-      - uses: gradle/actions/setup-gradle@v3
-
-      - name: Normalize EOL (gradlew)
-        run: sed -i 's/\r$//' gradlew
+          java-version: 17
+          cache: gradle
 
       - name: Make gradlew executable
-        run: chmod +x ./gradlew
+        run: sed -i 's/\r$//' gradlew && chmod +x gradlew
 
-      - name: Build
+      - name: Build & Test
         run: ./gradlew clean build --no-daemon
-        # если сейчас нужно «зеленеть» — временно:
-        # run: ./gradlew clean build -x test --no-daemon
