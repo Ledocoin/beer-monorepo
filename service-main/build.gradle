@@ -44,7 +44,7 @@ dependencies {
 
     implementation 'com.aventrix.jnanoid:jnanoid:2.0.0'
 
-    implementation 'org.postgresql:postgresql:42.6.0'
+    implementation 'org.postgresql:postgresql:42.7.7'
 
     testImplementation 'org.testcontainers:postgresql:1.19.0'
 
