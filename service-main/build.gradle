@@ -38,7 +38,7 @@ dependencies {
 
     implementation 'com.h2database:h2:2.3.232'
 
-    implementation 'org.liquibase:liquibase-core:4.31.1'
+    implementation 'org.liquibase:liquibase-core:4.33.0'
 
     implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6"
 
