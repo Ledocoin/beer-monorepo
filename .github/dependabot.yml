@@ -1,0 +1,92 @@
+version: 2
+updates:
+  # Gradle: основной сервис
+  - package-ecosystem: "gradle"
+    directory: "/service-main"
+    schedule:
+      interval: "weekly"        # daily/weekly/monthly
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Kyiv"
+    open-pull-requests-limit: 10
+    labels: ["dependencies", "service-main"]
+    commit-message:
+      prefix: "deps(main)"
+      include: "scope"
+    groups:
+      spring:
+        patterns: ["org.springframework*", "org.springframework.boot*"]
+      test-libs:
+        patterns: ["junit*", "org.mockito*", "org.testcontainers*"]
+    ignore:
+      # пример: не трогать мажорные апдейты Spring Boot
+      - dependency-name: "org.springframework.boot:*"
+        update-types: ["version-update:semver-major"]
+
+  # Gradle: сервис сотрудников
+  - package-ecosystem: "gradle"
+    directory: "/service-employee"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:05"
+      timezone: "Europe/Kyiv"
+    open-pull-requests-limit: 10
+    labels: ["dependencies", "service-employee"]
+    commit-message:
+      prefix: "deps(employee)"
+      include: "scope"
+    groups:
+      spring:
+        patterns: ["org.springframework*", "org.springframework.boot*"]
+      test-libs:
+        patterns: ["junit*", "org.mockito*", "org.testcontainers*"]
+    ignore:
+      - dependency-name: "org.springframework.boot:*"
+        update-types: ["version-update:semver-major"]
+
+  # GitHub Actions (workflow’ы в .github/workflows)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:10"
+      timezone: "Europe/Kyiv"
+    labels: ["dependencies", "ci"]
+    commit-message:
+      prefix: "deps(actions)"
+
+  # Docker образы в infra/docker-compose.yml и Dockerfile’ах сервисов
+  - package-ecosystem: "docker"
+    directory: "/infra"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:15"
+      timezone: "Europe/Kyiv"
+    labels: ["dependencies", "docker"]
+    commit-message:
+      prefix: "deps(docker)"
+
+  - package-ecosystem: "docker"
+    directory: "/service-main"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:20"
+      timezone: "Europe/Kyiv"
+    labels: ["dependencies", "docker", "service-main"]
+    commit-message:
+      prefix: "deps(docker-main)"
+
+  - package-ecosystem: "docker"
+    directory: "/service-employee"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:25"
+      timezone: "Europe/Kyiv"
+    labels: ["dependencies", "docker", "service-employee"]
+    commit-message:
+      prefix: "deps(docker-employee)"
