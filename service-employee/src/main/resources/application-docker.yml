@@ -1,0 +1,11 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:example@mongo:27017/mydb?authSource=admin
+  cache:
+    type: redis
+    redis:
+      time-to-live: 60000
+
+server:
+  port: 8081

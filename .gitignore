@@ -1,0 +1,12 @@
+# Java/Gradle
+**/build/
+**/out/
+*.log
+
+# IntelliJ
+**/.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db

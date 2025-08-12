@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://postgres:5432/beerdb
+    username: user
+    password: pass
+
+beer-application:
+  urls:
+    employee: http://service-employee:8081

@@ -1,0 +1,12 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:example@localhost:27017/
+      database: mydb
+  cache:
+    type: redis
+    redis:
+      time-to-live: 60000 # optional: TTL in ms
+
+server:
+  port: 8081

@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/changelog/changelog.yml
+
+beer-application:
+  urls:
+    employee: http://localhost:10102

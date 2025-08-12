@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - logicalFilePath: changelog/changelog.yml
+
+  - include:
+      file: changelog/2025-05-20/database-ddl.sql
+
+  - include:
+      file: changelog/2025-05-20/01-beer-type-insertion.sql
+
+  - include:
+      file: changelog/2025-05-27/02-create-store-table.sql
+
+  - include:
+      file: changelog/2025-05-27/03-create-storage-table.sql

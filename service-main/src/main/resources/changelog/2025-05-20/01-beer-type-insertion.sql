@@ -1,0 +1,10 @@
+INSERT INTO TYPE (id, name) VALUES (1, 'Lager'),
+                                   (2, 'Pilsner'),
+                                   (3, 'Pale Ale'),
+                                   (4, 'IPA'),
+                                   (5, 'Porter'),
+                                   (6, 'Stout'),
+                                   (7, 'Wheat Beer'),
+                                   (8, 'Sour'),
+                                   (9, 'Bock'),
+                                   (10, 'Amber Ale');

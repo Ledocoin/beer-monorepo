@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: beerdb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+    ports: ["5432:5432"]
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+
+  mongo:
+    image: mongo:7.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports: ["27017:27017"]
+    volumes:
+      - mongo-data:/data/db
+
+  redis:
+    image: redis:7.2
+    command: ["redis-server", "--appendonly", "yes"]
+    ports: ["6379:6379"]
+    volumes:
+      - redis-data:/data
+
+  service-employee:
+    build: ../service-employee
+    depends_on: [mongo, redis]
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports: ["8081:8081"]
+
+  service-main:
+    build: ../service-main
+    depends_on: [postgres, service-employee]
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports: ["8080:8080"]
+
+volumes:
+  pg-data:
+  mongo-data:
+  redis-data:
