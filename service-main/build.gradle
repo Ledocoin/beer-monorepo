@@ -40,7 +40,7 @@ dependencies {
 
     implementation 'org.liquibase:liquibase-core:4.31.1'
 
-    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6"
+    implementation "org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.11"
 
     implementation 'com.aventrix.jnanoid:jnanoid:2.0.0'
 
