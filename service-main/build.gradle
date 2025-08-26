@@ -52,7 +52,7 @@ dependencies {
 
     implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
 
-    testImplementation "org.wiremock.integrations:wiremock-spring-boot:3.6.0"
+    testImplementation "org.wiremock.integrations:wiremock-spring-boot:3.10.6"
 
     // kafka-listener mode
     implementation "org.springframework.kafka:spring-kafka"
