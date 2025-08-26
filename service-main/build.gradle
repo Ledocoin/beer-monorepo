@@ -54,6 +54,12 @@ dependencies {
 
     testImplementation "org.wiremock.integrations:wiremock-spring-boot:3.6.0"
 
+    // kafka-listener mode
+    implementation "org.springframework.kafka:spring-kafka"
+
+    testImplementation "org.testcontainers:kafka:1.21.3"
+
+    testImplementation "commons-codec:commons-codec:1.18.0"
 
 
 }

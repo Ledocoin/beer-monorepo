@@ -7,9 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "Пользовательский ввод данных для магазина")

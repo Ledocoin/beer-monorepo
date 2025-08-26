@@ -1,6 +1,8 @@
 spring:
   application:
     name: beer-main
+  profiles:
+    active: kafka-listener #kafka-listener #functional-stream #integration-flow
 
   datasource:
     url: jdbc:postgresql://localhost:5432/beerdb
@@ -20,6 +22,20 @@ spring:
     enabled: true
     change-log: classpath:/changelog/changelog.yml
 
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: ${beer-application.kafka.group-id}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.json.trusted.packages: org.example.beerProj.*
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.value.default.type: com.fasterxml.jackson.databind.JsonNode
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
 springdoc:
   swagger-ui:
     path: "/swagger"
@@ -29,3 +45,12 @@ springdoc:
 beer-application:
   urls:
     employee: http://localhost:8081
+  kafka:
+    group-id: beer-app
+    flows:
+      store-creation:
+        topic: storeCreation
+        source: X
+      employee-creation:
+        topic: employeeCreation
+        source: ${spring.application.name}
