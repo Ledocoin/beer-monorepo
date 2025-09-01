@@ -59,7 +59,7 @@ dependencies {
 
     testImplementation "org.testcontainers:kafka:1.21.3"
 
-    testImplementation "commons-codec:commons-codec:1.18.0"
+    testImplementation "commons-codec:commons-codec:1.19.0"
 
 
 }
