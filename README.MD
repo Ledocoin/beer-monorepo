@@ -1,6 +1,6 @@
 # 📜 README
 
-## EN — Introduction
+## Introduction
 
 This repository contains a **BeerStack** demo project — a microservices-based system that manages **beers, stores, storages, and employees**. It demonstrates modern backend architecture with **Spring Boot, PostgreSQL, MongoDB, Redis, Kafka**, and container orchestration via **Docker Compose**.
 
@@ -15,7 +15,7 @@ The goal is to showcase domain-driven design, service-to-service communication (
 
 ----------
 
-## EN — System Overview
+## System Overview
 
 ### Services
 
@@ -59,7 +59,7 @@ The goal is to showcase domain-driven design, service-to-service communication (
 
 ----------
 
-## EN — Functional Features
+## Functional Features
 
 -   Beer management: create, update, patch, delete, search by criteria
     
@@ -84,7 +84,7 @@ The goal is to showcase domain-driven design, service-to-service communication (
 
 ----------
 
-## EN — Requirements
+## Requirements
 
 **Functional**
 
@@ -110,7 +110,7 @@ The goal is to showcase domain-driven design, service-to-service communication (
 
 ----------
 
-## EN — Run Instructions
+## Run Instructions
 
 1.  Clone the repository
     
