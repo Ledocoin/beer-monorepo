@@ -3,3 +3,17 @@ spring:
     mongodb:
       uri: dummy-placeholder # будет переопределено в рантайме
       database: ssdb
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      auto-offset-reset: earliest
+
+beer-application:
+  kafka:
+    group-id: test-employee
+    flows:
+      employee-creation:
+        topic: employeeCreation
+        source: beer-main

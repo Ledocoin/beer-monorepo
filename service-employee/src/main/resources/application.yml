@@ -1,6 +1,8 @@
 spring:
   application:
     name: beer-employee
+  profiles:
+    active: kafka-listener
   data:
     mongodb:
       uri: mongodb://root:example@localhost:27017/
@@ -9,6 +11,24 @@ spring:
     type: redis
     redis:
       time-to-live: 60000 # optional: TTL in ms
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: ${beer-application.kafka.group-id}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.json.trusted.packages: org.example.sideservicefbeerproj.*
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.value.default.type: com.fasterxml.jackson.databind.JsonNode
+
+beer-application:
+  kafka:
+    group-id: beer-employee
+    flows:
+      employee-creation:
+        topic: employeeCreation
+        source: beer-main
 
 server:
   port: 8081

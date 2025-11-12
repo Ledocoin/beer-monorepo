@@ -1,4 +1,6 @@
 spring:
+  kafka:
+    bootstrap-servers: kafka:9092
   data:
     mongodb:
       uri: mongodb://root:example@mongo:27017/mydb?authSource=admin
@@ -6,6 +8,13 @@ spring:
     type: redis
     redis:
       time-to-live: 60000
+beer-application:
+  kafka:
+    group-id: beer-employee-docker
+    flows:
+      employee-creation:
+        topic: employeeCreation
+        source: beer-main
 
 server:
   port: 8081
