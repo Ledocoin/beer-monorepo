@@ -37,18 +37,6 @@ public class BeerServiceTest {
     @InjectMocks
     private BeerService beerService;
 
-    /*@BeforeEach
-        void setUp() {
-           // Ручное создание мока
-            storeRepository = Mockito.mock(StoreRepository.class);
-
-            // Ручное внедрение мока в тестируемый класс
-           storeService = new StoreService(storeRepository);
-        }
-    */
-
-    
-
     @Test
     void getAllBeers_shouldReturnPage() {
         BeerEntity beer = new BeerEntity();

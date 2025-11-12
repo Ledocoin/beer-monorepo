@@ -24,7 +24,7 @@ public class StoreKafkaListenerTests extends BasicKafkaTests {
         var employee = EmployeeDto.builder()
                 .name("Иван")
                 .surname("Иванов")
-                .phone("79684551122")
+                .phone("380509007892")
                 .email("ivan.ivanov@example.com")
                 .position("продавец")
                 .salary(BigInteger.valueOf(45_000))
@@ -32,8 +32,8 @@ public class StoreKafkaListenerTests extends BasicKafkaTests {
                 .build();
 
         var storeWithEmployee = CreateStoreWithEmployeeDto.builder()
-                .address("г. Тверь, ул. Советская, д. 12")
-                .phone("79684551112")
+                .address("10505 Katy Freeway Houston")
+                .phone("380509007892")
                 .employees(List.of(employee))
                 .build();
 

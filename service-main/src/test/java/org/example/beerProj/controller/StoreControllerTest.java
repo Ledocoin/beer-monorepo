@@ -133,8 +133,8 @@ public class StoreControllerTest extends BasicIntegrationTests {
                 .build();
         var empl2 = EmployeeDto.builder()
                 .id(null)
-                .name("Говнов")
-                .surname("Баширов")
+                .name("Jane")
+                .surname("Doe")
                 .phone("380667329467")
                 .email("g.s@gmail.com")
                 .position("Бедолага2")
@@ -190,8 +190,8 @@ public class StoreControllerTest extends BasicIntegrationTests {
 
         var empl2 = EmployeeDto.builder()
                 .id(null)
-                .name("Говнов")
-                .surname("Баширов")
+                .name("Jane")
+                .surname("Doe")
                 .phone("380667329467")
                 .email("g.s@gmail.com")
                 .position("Бедолага2")
@@ -253,8 +253,8 @@ public class StoreControllerTest extends BasicIntegrationTests {
 
         var empl2 = EmployeeDto.builder()
                 .id(null)
-                .name("Говнов")
-                .surname("Баширов")
+                .name("Jane")
+                .surname("Doe")
                 .phone("380667329467")
                 .email("g.s@gmail.com")
                 .position("Бедолага2")
@@ -344,8 +344,8 @@ public class StoreControllerTest extends BasicIntegrationTests {
                             },
                             {
                               "id": "id_2",
-                              "name": "Говнов",
-                              "surname": "Баширов",
+                              "name": "Jane",
+                              "surname": "Doe",
                               "phone": "380667329467",
                               "email": "g.s@gmail.com",
                               "position": "Бедолага2",
@@ -361,7 +361,7 @@ public class StoreControllerTest extends BasicIntegrationTests {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.employees.length()").value(2))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.employees[0].name").value("Иван"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[1].name").value("Говнов"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.employees[1].name").value("Doe"));
 
         WireMock.verify(1, WireMock.getRequestedFor(WireMock.urlPathEqualTo("/employee/store/" + storeId)));
     }
