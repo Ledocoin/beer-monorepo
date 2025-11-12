@@ -2,6 +2,7 @@ package org.example.beerProj.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
+import org.example.beerProj.config.BasicIntegrationTests;
 import org.example.beerProj.config.PostgresInitializer;
 import org.example.beerProj.dto.BeerRequest;
 import org.example.beerProj.entity.BeerEntity;
@@ -24,23 +25,10 @@ import java.util.stream.IntStream;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-@ContextConfiguration(initializers = {PostgresInitializer.class})
-public class BeerControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private BeerRepository beerRepository;
-
-    @Autowired
-    private ObjectMapper objectMapper;
+public class BeerControllerTest  extends BasicIntegrationTests {
 
     private static final String BASE_URL = "/beer";
-
     private String existingBeerId;
 
     @BeforeEach

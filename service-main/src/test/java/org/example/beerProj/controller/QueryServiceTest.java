@@ -1,5 +1,6 @@
 package org.example.beerProj.controller;
 
+import org.example.beerProj.config.BasicIntegrationTests;
 import org.example.beerProj.config.PostgresInitializer;
 import org.example.beerProj.entity.BeerEntity;
 import org.example.beerProj.entity.StorageEntity;
@@ -21,22 +22,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.math.BigDecimal;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-@ContextConfiguration(initializers = {PostgresInitializer.class})
-public class QueryServiceTest {
-    @Autowired
-    private MockMvc mockMvc;
 
-    @Autowired
-    private BeerRepository beerRepository;
+public class QueryServiceTest extends BasicIntegrationTests {
 
-    @Autowired
-    private StoreRepository storeRepository;
-
-    @Autowired
-    private StorageRepository storageRepository;
     private BeerEntity build;
 
     @BeforeEach

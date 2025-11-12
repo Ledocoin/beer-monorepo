@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import org.assertj.core.api.Assertions;
 import org.example.beerProj.client.dto.EmployeeDto;
+import org.example.beerProj.config.BasicIntegrationTests;
 import org.example.beerProj.config.PostgresInitializer;
 import org.example.beerProj.dto.StoreRequest;
 import org.example.beerProj.entity.StoreEntity;
@@ -28,31 +29,11 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.IntStream;
 
-@EnableWireMock(
-        {
-                @ConfigureWireMock(
-                        name = "wm-server",
-                        port = 10102
-                )
-        }
-)
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-@ContextConfiguration(initializers = {PostgresInitializer.class})
-public class StoreControllerTest {
+public class StoreControllerTest extends BasicIntegrationTests {
 
     private static final String BASE_URL = "/store";
     private final String storeId = "12345678";
-    @Autowired
-    private MockMvc mockMvc;
-    @Autowired
-    private ObjectMapper objectMapper;
-    @Autowired
-    private StoreRepository storeRepository;
-    @Autowired
-    private StorageRepository storageRepository;
 
     @BeforeEach
     void setup() {

@@ -13,6 +13,7 @@ import org.example.beerProj.dto.StoreRequest;
 import org.example.beerProj.dto.StoreResponse;
 import org.example.beerProj.service.StoreService;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;

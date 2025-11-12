@@ -3,6 +3,7 @@ package org.example.beerProj.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
+import org.example.beerProj.config.BasicIntegrationTests;
 import org.example.beerProj.config.PostgresInitializer;
 import org.example.beerProj.dto.StorageDto;
 import org.example.beerProj.entity.BeerEntity;
@@ -25,27 +26,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.math.BigDecimal;
 
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-@ContextConfiguration(initializers = {PostgresInitializer.class})
-public class StorageControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
-
-    @Autowired
-    private ObjectMapper objectMapper;
-
-    @Autowired
-    private StorageRepository storageRepository;
-
-    @Autowired
-    private StoreRepository storeRepository;
-
-    @Autowired
-    private BeerRepository beerRepository;
-
+public class StorageControllerTest  extends BasicIntegrationTests {
     private static final String BASE_URL = "/storage";
 
     private Long existingStorageId;
