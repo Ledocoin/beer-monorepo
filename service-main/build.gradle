@@ -38,7 +38,7 @@ dependencies {
 
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
 
-    implementation 'com.h2database:h2:2.3.232'
+    implementation 'com.h2database:h2:2.4.240'
 
     implementation 'org.liquibase:liquibase-core:4.31.1'
 
