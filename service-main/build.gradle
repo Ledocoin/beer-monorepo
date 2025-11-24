@@ -48,7 +48,7 @@ dependencies {
 
     implementation 'org.postgresql:postgresql:42.6.0'
 
-    testImplementation 'org.testcontainers:postgresql:1.19.0'
+    testImplementation 'org.testcontainers:postgresql:1.21.3'
 
     implementation "com.squareup.okhttp3:okhttp:4.12.0"
 
